@@ -28,11 +28,11 @@ install:
  - export PATH=`pwd`/third_party/llvm-build/Release+Asserts/bin:$PATH
  - (cd js; yarn)
  - rm -f $BUILD_PATH/args.gn # Don't use cached values.
- - gn gen $BUILD_PATH --args='is_debug=false cc_wrapper="ccache" use_custom_libcxx = false use_sysroot = false'
+ - gn gen $BUILD_PATH --args='is_debug=false cc_wrapper="ccache" use_custom_libcxx=false use_sysroot=false'
  - gn args $BUILD_PATH --list
  - ccache -s
  - env
- - ninja -C $BUILD_PATH mock_runtime_test deno
+ - ninja -j2 -C $BUILD_PATH mock_runtime_test deno
 script:
  - $BUILD_PATH/mock_runtime_test
  - $BUILD_PATH/deno
